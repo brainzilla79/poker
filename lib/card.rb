@@ -37,6 +37,10 @@ class Card
     "A" => 14
   }
 
+  def number_value
+    VALUES_NAMES[self.value]
+  end
+
   def to_s
     self.value + SUIT_SYMBOLS[self.suit]
   end

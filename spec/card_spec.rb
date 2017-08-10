@@ -30,4 +30,10 @@ describe Card do
       expect(card.to_s).to eq("A♠")
     end
   end
+
+  describe '#number_value' do
+    it 'returns the numerical card value' do
+      expect(card.number_value).to eq (14)
+    end
+  end
 end
