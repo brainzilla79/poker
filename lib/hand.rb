@@ -8,7 +8,6 @@ class Hand
     @cards = cards
   end
 
-
   def four_of_a_kind?
     face_values.combination(4).any? do |quad_combo|
       quad_combo.uniq.size == 1
@@ -38,11 +37,12 @@ class Hand
   end
 
   def flush?
-    # suits.uniq.size == 1
+    suits.uniq.size == 1
   end
 
   def straight?
-    # sorted = @cards.sort.dup
+    # sorted = @cards.num_values.sort.dup
+    # return true if sorted == [2, 3, 4, 5, 11]
     # last_num = sorted.first
     # sorted[1..-1].each do |num|
     #   return false if num - last_num != 1

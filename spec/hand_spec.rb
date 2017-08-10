@@ -17,6 +17,7 @@ describe Hand do
   let(:two_clubs) { double("two_clubs", :value => "2", :suit => :clubs, :number_value => 2)}
   let(:four_clubs) { double("four_clubs", :value => "4", :suit => :clubs, :number_value => 4)}
   let(:three_clubs) { double("three_clubs", :value => "3", :suit => :clubs, :number_value => 3)}
+  let(:jack_clubs) { double("jack_clubs", :value => "J", :suit => :clubs, :number_value => 11)}
 
   describe '#four_of_a_kind' do
     it 'returns true if hand has four of a kind' do
@@ -58,6 +59,21 @@ describe Hand do
       hand = Hand.new(cards)
 
       expect(hand.pair?).to be true
+    end
+  end
+
+  describe '#flush?' do
+    it 'returns true if hand is a flush' do
+      cards = [two_clubs, three_clubs, four_clubs, jack_clubs, ace_clubs]
+      hand = Hand.new(cards)
+
+      expect(hand.flush?).to be true
+    end
+  end
+
+  describe '#straight' do
+    it 'returns true if hand is a straight' do
+      
     end
   end
 
