@@ -8,44 +8,33 @@ class Hand
     @cards = cards
   end
 
-  def face_values
-    @cards.map(&:value)
-  end
-
-  def num_values
-    @cards.map(&:number_value)
-  end
-
-  def suits
-    # @cards.map(&:suit)
-  end
 
   def four_of_a_kind?
-    # face_values.combination(4).any? do |quad_combo|
-    #   quad_combo.uniq.size == 1
-    # end
+    face_values.combination(4).any? do |quad_combo|
+      quad_combo.uniq.size == 1
+    end
   end
 
   def three_of_a_kind?
-    # face_values.combination(3).any? do |trip_combo|
-    #   trip_combo.uniq.size == 1
-    # end
+    face_values.combination(3).any? do |trip_combo|
+      trip_combo.uniq.size == 1
+    end
   end
 
   def pairs
-    # pairs = []
-    # face_values.combination(2).each do |pair|
-    #   pairs << pair if pair.uniq.size == 1 && !pairs.include?(pair)
-    # end
-    # pairs
+    pairs = []
+    face_values.combination(2).each do |pair|
+      pairs << pair if pair.uniq.size == 1 && !pairs.include?(pair)
+    end
+    pairs
   end
 
   def two_pair?
-    # pairs.size == 2
+    pairs.size == 2
   end
 
   def pair?
-    # pairs.size == 1
+    pairs.size == 1
   end
 
   def flush?
@@ -64,5 +53,23 @@ class Hand
 
   def straight_flush?
     # straight? && flush?
+  end
+
+  def high_card
+    num_values.sort.last
+  end
+
+private
+
+  def face_values
+    @cards.map(&:value)
+  end
+
+  def num_values
+    @cards.map(&:number_value)
+  end
+
+  def suits
+    @cards.map(&:suit)
   end
 end

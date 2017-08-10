@@ -13,25 +13,51 @@ describe Hand do
   let(:ace_clubs) { double("ace_clubs", :value => "A", :suit => :clubs, :number_value => 14)}
   let(:ace_hearts) { double("ace_hearts", :value => "A", :suit => :hearts, :number_value => 14)}
   let(:ace_diams) { double("ace_diams", :value => "A", :suit => :diamonds, :number_value => 14)}
-  let(:two_diams) { double("ace_diams", :value => "2", :suit => :diamonds, :number_value => 2)}
+  let(:two_diams) { double("two_diams", :value => "2", :suit => :diamonds, :number_value => 2)}
+  let(:two_clubs) { double("two_clubs", :value => "2", :suit => :clubs, :number_value => 2)}
+  let(:four_clubs) { double("four_clubs", :value => "4", :suit => :clubs, :number_value => 4)}
+  let(:three_clubs) { double("three_clubs", :value => "3", :suit => :clubs, :number_value => 3)}
 
-  describe '#face_values' do
-    it 'returns the face values of the cards in hand' do
-      card_values = ["A", "A", "A", "A", "2"]
+  describe '#four_of_a_kind' do
+    it 'returns true if hand has four of a kind' do
       cards = [ace_spades, ace_diams, ace_hearts, ace_clubs, two_diams]
       hand = Hand.new(cards)
 
-      expect(hand.face_values).to eq(card_values)
+      expect(hand.four_of_a_kind?).to be true
     end
   end
 
-  describe '#num_values' do
-    it 'returns the number values of the cards in hand' do
-      num_values = [14, 14, 14, 14, 2]
+  describe '#three_of_a_kind' do
+    it 'returns true if hand has three of a kind' do
       cards = [ace_spades, ace_diams, ace_hearts, ace_clubs, two_diams]
       hand = Hand.new(cards)
+      expect(hand.three_of_a_kind?).to be true
+    end
+  end
 
-      expect(hand.num_values).to eq(num_values)
+  describe '#pairs' do
+    it 'returns the unique pairs in the hand' do
+      cards = [ace_spades, ace_diams, ace_hearts, two_clubs, two_diams]
+      hand = Hand.new(cards)
+
+      expect(hand.pairs).to eq([["A", "A"], ["2", "2"]])
+    end
+  end
+
+  describe '#two_pair?' do
+    it 'returns true if hand has two pairs' do
+      cards = [ace_spades, ace_diams, ace_hearts, two_clubs, two_diams]
+      hand = Hand.new(cards)
+      expect(hand.two_pair?).to be true
+    end
+  end
+
+  describe '#pair?' do
+    it 'returns true if had has one pair' do
+      cards = [ace_spades, ace_diams, four_clubs, three_clubs, two_diams]
+      hand = Hand.new(cards)
+
+      expect(hand.pair?).to be true
     end
   end
 
